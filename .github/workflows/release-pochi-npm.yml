@@ -3,12 +3,13 @@ name: Release Pochi NPM package
 on:
   workflow_dispatch:
   push:
+    branches: ["main", "grb-main"]
     tags:
       - "cli@*"
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: write
 

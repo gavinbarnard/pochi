@@ -7,7 +7,7 @@ description: |
   - "where is the authentication logic implemented"
   - "find all usages of the config parser"
   - "how does the ignore-walk module work"
-model: google/gemini-3-flash
+model: qwen/qwen3-coder-30b-a3b-instruct
 tools: readFile, globFiles, listFiles, searchFiles
 ---
 

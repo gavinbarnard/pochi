@@ -3,12 +3,13 @@ name: Release Pochi Cli Binary
 on:
   workflow_dispatch:
   push:
+    branches: ["main", "grb-main"]
     tags:
       - "cli@*"
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: write
 
@@ -66,7 +67,7 @@ jobs:
           gh repo clone "$REPO_OWNER/homebrew-pochi"
           cd homebrew-pochi
 
-          OLD_VERSION=$(grep 'version ' Formula/pochi.rb | sed -E 's/.*version "(.*)".*/\1/')
+          OLD_VERSION=$(grep 'version ' Formula/pochi.rb | sed -E 's/.*version \"(.*)\".*/\1/')
 
           cp Formula/pochi.rb "Formula/pochi@$VERSION.rb"
           VERSION_NO_DOTS=$(echo $VERSION | tr -d '.')

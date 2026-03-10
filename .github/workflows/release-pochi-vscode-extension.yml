@@ -3,6 +3,7 @@ name: Release Pochi VSCode Extension
 on:
   workflow_dispatch:
   push:
+    branches: ["main", "grb-main"]
     tags:
       - "vscode@*"
 
@@ -12,7 +13,7 @@ concurrency:
 
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: write
     steps:
@@ -38,7 +39,7 @@ jobs:
           is_prerelease=false
 
           # Check if this is a pre-release (contains -alpha, -beta, or -rc, with or without trailing qualifiers)
-          if echo "$version" | grep -Eq -- '-(alpha|beta|rc)(\.|$)'; then
+          if echo "$version" | grep -Eq -- '-(alpha|beta|rc)(\\.|$)'; then
             is_prerelease=true
             echo "This is a pre-release version: $version (pre-release suffix detected)"
           else
